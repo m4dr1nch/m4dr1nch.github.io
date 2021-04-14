@@ -1,0 +1,74 @@
+@font-face{
+    font-family: 'consola';
+    src: url("../fnt/consola.ttf");
+}
+
+.main{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    user-select: none;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.mainText{
+    color: #ededed;
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 3.5vh;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.mainImage{
+    position: absolute;
+    text-transform: uppercase;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.main img{
+    width: 45vh;
+    height: 45vh;
+    border-radius: 100%;
+}
+
+.main span{
+    color: #ff2828;
+    font-size: 8vh;
+}
+
+@media screen and (max-width:768px) {
+    .main{
+        overflow: hidden;
+    }
+
+    .mainText{
+        font-size: 3vh;
+        top: 70%;
+    }
+
+    .mainImage{
+        top: 20%;
+    }
+
+    .main span{
+        font-size: 7vh;
+    }
+}
+
+@media screen and (max-width:1024px) {
+
+}
+
+/* For the OCD */
+
+@media screen and (max-height:420px) {
+    .main{
+        display: none;
+    }
+}
