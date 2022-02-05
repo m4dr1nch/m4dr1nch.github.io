@@ -248,11 +248,10 @@ header nav li:last-child{
 
 .grid{
 	max-width: 800px;
-	padding: 0 20px;
 }
 
 .list {
-	padding: 0;
+	padding: 0 20px;
 	flex-basis: 50%;
 	text-align: center;
 }
@@ -263,14 +262,14 @@ header nav li:last-child{
 
 .list h4{
 	color: #17202A;
-    font-size: 20px;
-    margin-bottom: 25px;
+    	font-size: 20px;
+    	margin-bottom: 25px;
 }
 
 .list p{
 	padding: 0;
-    margin: 0;
-	text-align: left;
+	margin: 0;
+	text-align: justify;
 }
 
 .content-list{
