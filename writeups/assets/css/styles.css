@@ -1,0 +1,81 @@
+/*----------------------
+ 	Writeup Section
+----------------------*/
+
+section h3{
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+section p{
+	color: #fff;
+	max-width: 800px;
+	text-align: justify;
+	margin-top: 0;
+	margin-bottom: 16px;
+	padding: 0 20px;
+	line-height: 2;
+}
+
+section.writeup img {
+	max-width: 800px;
+	width: 100%;
+	margin-top: 0;
+	margin-bottom: 16px;
+	padding: 0 20px;
+}
+
+pre{
+	max-width: 800px;
+	width: 100%;
+	padding: 0px 20px;
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+code::selection{
+	background-color: #444;
+}
+
+code span::selection{
+	background-color: #444;
+}
+
+span img {
+	max-width: 300px;
+	max-height: 300px;
+}
+
+.writeup{
+	background-color: #1C2833;
+}
+
+.writeup h3{
+	color: #f1f1f1;
+	font: bold 32px Arial;
+	margin-top: 0;
+	margin-bottom: 16px;
+	text-align: center;
+}
+
+.writeup h4{
+	max-width: 800px;
+	padding: 0 20px;
+	width: 100%;
+	color: #f1f1f1;
+	font: bold 26px Arial;
+	margin-top: 0;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+.writeup h5{
+	max-width: 800px;
+	padding: 0 20px;
+	width: 100%;
+	color: #f1f1f1;
+	font: bold 18px Arial;
+	margin-bottom: 0;
+	margin-bottom: 5px;
+	text-align: left;
+}
