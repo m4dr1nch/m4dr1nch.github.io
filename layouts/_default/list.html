@@ -1,0 +1,54 @@
+{{- define "background" }}
+<div id="particles-js"></div>
+{{- end }}
+
+{{- define "main" }}
+<div class="container text-light" style="max-width: 800px">
+    <div class="list-group pb-4">
+        <h1 class="text-capitalize">{{ .Title }}</h1>
+        <h5 class="mb-2">Mostly InfoSec stuff but also other things</h5>
+        <p class="mb-1">Look for specific tags:</p>
+        <div class="d-flex mb-4">
+            {{- range $name, $taxonomy := .Site.Taxonomies.tags}} {{ $cnt := .Count }}
+                {{- with $.Site.GetPage (printf "/tags/%s" $name) }}
+                <a href={{ .RelPermalink }} id="tag-{{ $name }}" class="mr-2 pr-1 pl-1 rounded tag" title="All pages with tag: {{$name}}">{{$name}}</a>
+                {{- end }}
+            {{- end }}
+        </div>
+
+        {{- .Content }}
+        {{- range .Pages }}
+
+        <a href="{{ .RelPermalink }}" class="list-group-item list-group-item-action flex-column align-items-start text-light blog-block mb-1 p-2">
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <h5 class="mb-1">{{ .LinkTitle }}</h5>
+                    <small>
+                        <b>{{ .Summary }}</b>
+                    </small>
+                    <br>
+                    <small style="color: var(--p-redish)">
+                        <b>{{ .Date | time.Format ":date_medium" }}</b>
+                    </small>
+                </div>
+                <div class="d-flex flex-column">
+                    {{- with .Param "tags" }}
+                        {{- range $index, $tag := (. | sort) }} 
+                            {{- with $.Site.GetPage (printf "/%s/%s" "tags" $tag) }}
+                    <div id="tag-{{ $tag | urlize}}" class="m-1 pl-1 pr-1 text-center rounded align-self-center tag-p">{{ $tag | urlize }}</div>
+                            {{- end }}
+                        {{- end }}
+                    {{- end }}
+                </div>
+            </div>
+        </a>
+        {{- end }}
+    </div>
+</div>
+{{- end }}
+
+{{- define "footer" }}
+<script>
+    particlesJS.load('particles-js', '/assets/js/particle-config.json', function() {});
+</script>
+{{- end }}

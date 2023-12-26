@@ -1,0 +1,17 @@
+{{- define "main" }}
+<div class="container text-light p-4" style="max-width: 800px">
+    <div class="blog-title d-flex justify-content-between p-4 mb-4 rounded">
+        <div>
+            <h1>{{ .Title }}</h1>
+            {{- $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+            {{- $dateHuman := .Date | time.Format ":date_long" }}
+            <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+            {{- partial "tags" . }}
+        </div>
+        <img class="rounded" src="{{ .Params.thumbnail }}">
+    </div>
+    <div class="blog-content p-4 rounded">
+    {{- .Content }}
+    </div>
+</div>
+{{- end }}
