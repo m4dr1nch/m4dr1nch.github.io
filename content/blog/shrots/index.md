@@ -7,7 +7,7 @@ summary = 'A dead simple popup tool for learning shortcuts'
 thumbnail = 'img/sh-thumbnail.png'
 +++
 
-![](img/sh-logo.png)
+![](img/sh-logo.png#transparent)
 
 Shrots - A Fast Way To Memorize Shortcuts
 =========================================
