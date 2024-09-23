@@ -1,0 +1,13 @@
+baseURL = 'https://m4dd.rocks/'
+languageCode = 'en-us'
+title = 'm4dd.rocks'
+
+[menus]
+[[menus.main]]
+    name = 'Blog'
+    pageRef = '/blog'
+    weight = 10
+[[menus.main]]
+    name = 'Github'
+    url = 'https://github.com/m4dr1nch'
+    weight = 20

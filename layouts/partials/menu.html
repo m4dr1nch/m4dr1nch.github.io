@@ -1,0 +1,10 @@
+<div class="container pt-4 pb-4 text-light" style="max-width: 800px">
+    <div class="d-flex justify-content-between">
+        <a class="h3" href="/">[m4dd.rocks]</a>
+        <div class="d-flex align-items-center">
+            {{- range site.Menus.main }}
+            <a class="pl-3" href="{{ .URL }}">[{{ .Name }}]</a>
+            {{- end }}
+        </div>
+    </div>
+</div>

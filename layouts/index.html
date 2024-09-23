@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+{{ partialCached "head" . }}
+
+<body class="text-white">
+    <div id="particles-js"></div>
+    <div class="d-flex align-items-center w-100 h-100">
+        <div class="d-flex m-auto" style="width: 1000px; height: 500px;">
+            <div class="order-0">
+                <img src="assets/img/avatar.png" style="width: 500px; height: 500px;">
+            </div>
+            <div class="order-1">
+                <h4 id="welcome">Welcome to: `m4dd.rocks` 💻</h4>
+                <p class="m-0">
+                    Hello, my name is 'm4dr1nch' or 'm4dd' for short...
+                    <br>
+                    Holder of:
+                    <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-center mb-1">
+                            <span class="badge badge-warning mr-1">BSCP</span>
+                            <span class="badge badge-warning">eJPT</span>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <span class="badge badge-warning">CS Bachelor's</span> 
+                        </div>
+                    </div>                    
+                    <br>
+                    Visit my <a href="blog">Blog (◕‿◕✿)</a>!!
+                    <br>
+                    Links:
+                </p>
+                <div class="d-flex flex-column align-items-center">
+                    <div class="p-1"><script src="https://tryhackme.com/badge/359498"></script></div>
+                    <div class="p-1"><script src="https://www.hackthebox.com/badge/470048"></script></div>
+                    <div class="p-1"><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="_m4dd" data-color="#343c41" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#ffffff" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    particlesJS.load('particles-js', '/assets/js/particle-config.json', function() {});
+
+    message = [
+        'Welcome to: `m4dd.rocks` 💻',
+        'W<span>3</span>lc<span>0</span>m<span>3</span> to: `m4dd.rocks` 💻'
+    ]
+
+    var counter = 1;
+    var welcome = $('#welcome');
+    
+    setInterval(() => {
+        welcome.html(message[counter]);
+        counter == 0 ? counter++ : counter--;
+    }, 2500);
+</script>
+
+</html>
