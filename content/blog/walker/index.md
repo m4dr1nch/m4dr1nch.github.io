@@ -4,7 +4,7 @@ date = 2022-08-18T14:39:25+02:00
 draft = false
 tags = ['thm', 'writeup', 'special']
 summary = '[Walker](https://tryhackme.com/jr/walker) is a medium-hard CTF machine that has a now well-known initial access and a unique Privesc! It also incorporates some mobile testing like APK analysis and request capturing via BurpSuite. This is the second CTF-style machine that I have created and I hope that you have fun just as much as I did when I was making it! Good luck!'
-description = '"Walker" is my second CTF-style machine. Never released but available unofficially on the THM platform.'
+description = '"Walker" is my second CTF machine. Never released but available unofficially on the THM platform.'
 thumbnail = 'img/wl-icon.gif'
 +++
 

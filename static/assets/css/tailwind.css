@@ -1219,6 +1219,10 @@ content p code {
   width: 100%;
 }
 
+.w-\[600px\] {
+  width: 600px;
+}
+
 .min-w-\[1000px\] {
   min-width: 1000px;
 }
@@ -1337,6 +1341,12 @@ content p code {
   overflow: auto;
 }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -1380,6 +1390,10 @@ content p code {
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .px-1 {
