@@ -3,7 +3,8 @@ title = 'Shrots'
 date = 2023-12-14T21:52:22+02:00
 draft = false
 tags = ['tool', 'github']
-summary = 'A dead simple popup tool for learning shortcuts'
+summary = 'A dead simple popup tool for learning shortcuts.'
+description = 'A dead simple popup tool for learning shortcuts.'
 thumbnail = 'img/sh-thumbnail.png'
 +++
 

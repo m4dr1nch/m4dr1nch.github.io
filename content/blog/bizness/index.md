@@ -3,11 +3,10 @@ title = 'Bizness'
 date = 2024-01-14T21:17:42+02:00
 draft = false
 tags = ['htb', 'writeup']
-summary = 'An easy capture the flag challenge writeup'
+summary = '[Bizness](https://app.hackthebox.com/machines/Bizness) is an easy CTF machine from HTB. The initial access is trivial, but the privilege escalation bit was a little bit harder. Overall a fun challenge, shoutout to [C4rm3l0](https://app.hackthebox.com/users/458049).'
+description = '"Bizness" is an easy Linux CTF machine. Released on 6th of January, 2024 (HackTheBox).'
 thumbnail = 'img/bz-logo.png'
 +++
-
-[Bizness](https://app.hackthebox.com/machines/Bizness) is an easy CTF machine on HackTheBox. The initial access is trivial, but the priviledge escalation bit was a little bit harder. Overall a fun challenge, shoutout to [C4rm3l0](https://app.hackthebox.com/users/458049).
 
 Initial Access
 ==============

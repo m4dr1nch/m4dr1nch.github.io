@@ -3,15 +3,13 @@ title = 'Crun'
 date = 2024-08-11T17:04:22+03:00
 draft = false
 tags = ['tool', 'github', 'special']
-summary = 'Rofi plugin for custom application running'
+summary = 'Rofi plugin for custom application running. Quickly run specific commands with out the use of desktop files.'
+description = 'Rofi plugin for custom application running.'
 thumbnail = 'img/cr-thumbnail.png'
 +++
 
 Crun - Custom run (For Rofi)
 ======================================
----
----
-
 
 ![](img/cr-terminal.png)
 

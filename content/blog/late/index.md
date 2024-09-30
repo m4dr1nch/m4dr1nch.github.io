@@ -3,11 +3,10 @@ title = 'Late'
 date = 2022-04-23T14:27:49+02:00
 draft = false
 tags = ['htb', 'writeup']
-summary = 'Capture the flag challenge writeup'
+summary = '[Late](https://app.hackthebox.com/machines/Late) is an easy CTF machine. Features an SSTI in an image converter & unsecure $PATH.'
+description = '"Late" is an easy CTF machine. Released on 23rd of April, 2022 (HTB).'
 thumbnail = 'img/lt-logo.png'
 +++
-
-[Late](https://app.hackthebox.com/machines/Late) is an easy CTF-like machine that you can try to pwn on [HackTheBox](https://www.hackthebox.com/). It was released on 23 of April 2022 and for completion awards you 20 points. The focus of this challenge is to pwn a Linux server that hosts a vulnerable web application. The exploit features a custom SSTI payload delivered in an image format. After initial access, you can escalate your privileges by abusing an SSH login tracker script with the ability to write to the PATH.
 
 Initial Access
 ==============

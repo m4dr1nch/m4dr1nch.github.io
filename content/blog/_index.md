@@ -1,4 +1,0 @@
-+++
-title = 'Blog'
-particles = true
-+++

@@ -3,7 +3,8 @@ title = 'Paranoid'
 date = 2024-04-25T16:45:57+03:00
 draft = false 
 tags = ['tool', 'github']
-summary = 'Paranoid is a TOR based multi-chain proxy, to make deanonymization more difficult'
+summary = 'Paranoid is a TOR based multi-chain proxy, to make deanonymization more difficult.'
+description = 'Paranoid is a TOR based multi-chain proxy, to make deanonymization more difficult.'
 thumbnail = 'img/pr-thumbnail.png'
 +++
 
@@ -11,8 +12,7 @@ thumbnail = 'img/pr-thumbnail.png'
 
 Paranoid - TOR Based multichain proxy
 ======================================
----
----
+
 
 ![](img/pr-terminal.png)
 

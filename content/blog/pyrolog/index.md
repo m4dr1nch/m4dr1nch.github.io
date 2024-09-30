@@ -3,11 +3,13 @@ title = 'Pyrolog'
 date = 2022-10-12T21:12:03+02:00
 draft = false
 tags = ['tool', 'special', 'github']
-summary = 'An old project of mine. Log cleaner in Python...'
+summary = 'One my first programming projects. "PyroLog" is a simple log remover written in Python.'
+description = 'One my first programming projects. "PyroLog" is a simple log remover written in Python.'
 thumbnail = 'img/pl-logo.png'
 +++
 
-## About
+# Pyrolog
+## Overview
 [PyroLog](https://github.com/m4dr1nch/PyroLog) is an effective but also a simple log cleaner. This is a tool that can be used to clear your tracks as a pen-tester or just clean a computer. PyroLog is currently only available on Linux and requires python3.
 
 ![screenshot](https://i.imgur.com/6HwBSP6.jpg)
@@ -15,6 +17,7 @@ thumbnail = 'img/pl-logo.png'
 *(No dependencies)*
 
 ## Help Menu
+
 ```text
 usage: pyrolog.py [-h] --method METHOD --scope SCOPE [OPTIONS]
 

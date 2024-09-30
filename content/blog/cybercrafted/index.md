@@ -3,11 +3,10 @@ title = 'Cybercrafted'
 date = 2021-11-19T21:49:56+02:00
 draft = false
 tags = ['thm', 'writeup', 'special']
-summary = 'Featured capture the flag challenge'
+summary = '[Cybercrafted](https://tryhackme.com/room/cybercrafted) is a CTF-like challenge officially released on THM. This is the first CTF that I have created, and it features multiple misconfigurations & unsafe practices. This was prior to **Log4J** so any Minecraft exploitation routes are unintended.'
+description = '"Cybercrafted" is my first CTF-style machine. Available officially on the THM platform.'
 thumbnail = 'img/cc-logo.png'
 +++
-
-[Cybercrafted](https://tryhackme.com/room/cybercrafted) is a CTF-like challenge that you can find on TryHackMe. This room was released in 2021 by me and it is a fun challenge where you can practice your hacking skills. Altho it is rated as a medium in difficulty, it is a very beginner-friendly room. You can practice your enumeration skills with tools like Wfuzz, Gobuster, Nmap, SQLmap, and others. The room is purely based on misconfigurations within a server that you must find in order to complete it. This is the first CTF room that I have created so please be kind.
 
 Initial Access
 ==============
@@ -219,7 +218,7 @@ We can escape from the in-game console in multiple ways. I will be using a defau
 
 ![](img/cc-root.png)
 
-CREDITS
+Credits
 =======
 
 And there you have it! This was "Cybercrafted" by m4dr1nch. Thank you for completing my CTF box really hope you enjoyed it!

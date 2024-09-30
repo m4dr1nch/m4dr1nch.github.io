@@ -1,54 +1,89 @@
-{{- define "background" }}
-<div id="particles-js"></div>
-{{- end }}
+{{- define "main" -}}
+<div class="flex h-screen">
+    <!--Outer container for collision w/ list-->
+    <nav class="w-[400px] min-w-[400px]">
+        <!--Inner container for fixed content-->
+        <div class="fixed w-[400px] min-w-[400px] py-[100px] bg-gray-900 h-full border-r border-slate-600 text-center overflow-auto">
 
-{{- define "main" }}
-<div class="container text-light" style="max-width: 800px">
-    <div class="list-group pb-4">
-        <h1 class="text-capitalize">{{ .Title }}</h1>
-        <h5 class="mb-2">Mostly InfoSec stuff but also other things</h5>
-        <p class="mb-1">Look for specific tags:</p>
-        <div class="d-flex mb-4">
-            {{- range $name, $taxonomy := .Site.Taxonomies.tags}} {{ $cnt := .Count }}
-                {{- with $.Site.GetPage (printf "/tags/%s" $name) }}
-                <a href={{ .RelPermalink }} id="tag-{{ $name }}" class="mr-2 pr-1 pl-1 rounded tag" title="All pages with tag: {{$name}}">{{$name}}</a>
-                {{- end }}
-            {{- end }}
-        </div>
+            <img class="mx-auto pointer-events-none" style="width: 200px; height: 200px;" src="/assets/img/avatar.png">
 
-        {{- .Content }}
-        {{- range .Pages }}
+            <br>
 
-        <a href="{{ .RelPermalink }}" class="list-group-item list-group-item-action flex-column align-items-start text-light blog-block mb-1 p-2">
-            <div class="d-flex w-100 justify-content-between">
-                <div>
-                    <h5 class="mb-1">{{ .LinkTitle }}</h5>
-                    <small>
-                        <b>{{ .Summary }}</b>
-                    </small>
-                    <br>
-                    <small style="color: var(--p-redish)">
-                        <b>{{ .Date | time.Format ":date_medium" }}</b>
-                    </small>
-                </div>
-                <div class="d-flex flex-column">
-                    {{- with .Param "tags" }}
-                        {{- range $index, $tag := (. | sort) }} 
-                            {{- with $.Site.GetPage (printf "/%s/%s" "tags" $tag) }}
-                    <div id="tag-{{ $tag | urlize}}" class="m-1 pl-1 pr-1 text-center rounded align-self-center tag-p">{{ $tag | urlize }}</div>
-                            {{- end }}
-                        {{- end }}
-                    {{- end }}
-                </div>
+            <p class="text-4xl text-capitalize font-bold">Welcome 👋</p>
+
+            <hr>
+
+            <p class="mx-10">This blog / repo mostly contains <span>InfoSec</span> content e.g. challenge, vulnerability & tool write-ups.</p>
+
+            <br>
+
+            <p>Specific tags:</p>
+
+            <div class="flex flex-wrap w-[200px] mx-auto my-2 justify-center">
+                <a href="/blog/" id="tag-all" title="All pages.">all</a>
+
+                {{- range $name, $taxonomy := .Site.Taxonomies.tags -}} {{- $cnt := .Count -}}
+                    {{- with $.Site.GetPage (printf "/tags/%s" $name) -}}
+                    <a href="{{ .RelPermalink }}" id="tag-{{ $name }}" title="All pages with tag: {{$name}}">{{$name}}</a>
+                    {{- end -}}
+                {{- end -}}
             </div>
-        </a>
-        {{- end }}
+
+            <hr>
+
+            <div class="mx-10 text-lg">
+                <a class="px-1" href="/">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+                <a class="px-1" href="https://github.com/m4dr1nch" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="h-full max-w-[1000px] min-w-[1000px] mx-auto">
+        <div class="h-full content-center px-[50px]">
+
+            {{ range .Paginator.Pages }}
+
+            <a href="{{ .RelPermalink }}">
+                <div class="flex h-[100px] my-2 justify-between bg-slate-800 rounded-3xl transition duration-100 ease-in-out hover:bg-slate-700">
+                    <div class="flex flex-col p-4 text-slate-300 font-light">
+                        <span class="text-lg font-bold">{{ .LinkTitle }}</span>
+
+                        <b class="">{{ .Description }}</b>
+
+                        <br>
+
+                        <span class="text-rose-200 text-sm font-bold">
+                            {{ .Date | time.Format ":date_medium" }}
+                        </span>
+                    </div>
+                    <div class="p-4">
+                        <div class="h-full flex flex-wrap-reverse flex-col items-center">
+                            {{- with .Param "tags" }}
+                                {{- range $index, $tag := (. | sort) }} 
+                                    {{- with $.Site.GetPage (printf "/%s/%s" "tags" $tag) }}
+                            <div id="tag-{{ $tag | urlize}}" class="">{{ $tag | urlize }}</div>
+                                    {{- end }}
+                                {{- end }}
+                            {{- end }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {{ end }}
+
+
+            <paginator class="flex my-2">
+                {{- partial "pagination.html" . -}}
+            </paginator>
+
+        </div>
     </div>
 </div>
-{{- end }}
+{{- end -}}
 
-{{- define "footer" }}
-<script>
-    particlesJS.load('particles-js', '/assets/js/particle-config.json', function() {});
-</script>
-{{- end }}
+{{- define "footer" -}}
+{{- end -}}

@@ -3,11 +3,10 @@ title = 'Walker'
 date = 2022-08-18T14:39:25+02:00
 draft = false
 tags = ['thm', 'writeup', 'special']
-summary = 'Unfeatured capture the flag challenge'
+summary = '[Walker](https://tryhackme.com/jr/walker) is a medium-hard CTF machine that has a now well-known initial access and a unique Privesc! It also incorporates some mobile testing like APK analysis and request capturing via BurpSuite. This is the second CTF-style machine that I have created and I hope that you have fun just as much as I did when I was making it! Good luck!'
+description = '"Walker" is my second CTF-style machine. Never released but available unofficially on the THM platform.'
 thumbnail = 'img/wl-icon.gif'
 +++
-
-[Walker](https://tryhackme.com/jr/walker) is a medium-hard CTF machine that has a now well-known initial access and a unique Privesc! It also incorporates some mobile testing like APK analysis and request capturing via BurpSuite. This is the second CTF-style machine that I have created and I hope that you have fun just as much as I did when I was making it! Good luck!
 
 Initial Access
 ==============
@@ -637,7 +636,7 @@ If you have problems with running the grunt via wine then you could look for sol
 
 Now that you have root you still had one objective left. Remember the suspect directory in `/opt`? Well, now we have access to it! Go ahead and delete the contents!!
 
-CREDITS
+Credits
 =======
 
 And that's it!!! This was "walker" by madrinch. This was my second challenge room and I hope it's on par with the first one. Also, I learned a lot while making this and I hope you did as well.  

@@ -3,14 +3,12 @@ title = 'Gallery'
 date = 2022-02-11T14:14:22+02:00
 draft = false
 tags = ['thm', 'writeup']
-summary = 'Capture the flag challenge writeup'
+summary = '[Gallery](https://tryhackme.com/room/gallery666) is an easy CTF-like box that features vulnerabilities like SQLi, RCE & misconfiguration. This is a very beginner-friendly room that was created by [Mikaa](https://tryhackme.com/p/Mikaa).'
+description = '"Gallery" is an easy CTF machine. Released on 11th of February, 2022 (THM).'
 thumbnail = 'img/gl-logo.png'
 +++
 
-
-[Gallery](https://tryhackme.com/room/gallery666) is an easy CTF-like box where you can practice your enumeration skills and exploit vulnerabilities like SQLi and take advantage of misconfigurations in privileges. This is a very beginner-friendly room that was created by [Mikaa](https://tryhackme.com/p/Mikaa).
-
-INITIAL ACCESS
+Initial Access
 ==============
 
 Enumeration
@@ -89,7 +87,7 @@ if(!defined('DB_NAME')) define('DB_NAME',"gallery_db");
 
 ![](img/gl-database.png)
 
-PRIVILEGE ESCALATION
+Privilege Escalation
 ====================
 
 System User Access

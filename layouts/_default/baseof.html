@@ -1,20 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    {{- partial "head.html" . }}
+    {{- partial "head.html" . -}}
 </head>
 
-{{- block "background" . }}{{ end }}
-
 <body>
-    <header>
-        {{- partial "header.html" . }}
-    </header>
-    <main>
-        {{- block "main" . }}{{ end }}
-    </main>
-    <footer>
-        {{- block "footer" . }}{{ end }}
-    </footer>
+    {{- block "main" . -}}{{ end }}
 </body>
 </html>
