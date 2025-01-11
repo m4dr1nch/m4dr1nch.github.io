@@ -11,7 +11,7 @@ thumbnail = 'img/dt-logo.png'
 # M4dd's DOTFiles
 ## Overview
 
-Hello, these are my Linux dotfiles. I have been using Linux as a daily driver for about 3 years now... I am currently using Arch but might move to Artix in the future. You can find my dotfiles on [Github](https://github.com/m4dr1nch/Dots), enjoy **(◕‿◕✿)**.
+Hello, these are my Linux dotfiles. I have been using Linux as a daily driver for about 3 years now... I am currently using Arch but might move to Artix in the future. You can find my dotfiles on [Github](https://github.com/m4dr1nch/dotfiles), enjoy **(◕‿◕✿)**.
 
 Software that I use:
 * OS - **Arch (btw)**
